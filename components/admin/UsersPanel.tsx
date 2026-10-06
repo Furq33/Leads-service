@@ -39,6 +39,7 @@ export default function UsersPanel({ currentUserId }: { currentUserId: string })
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('created_at');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
@@ -83,6 +84,29 @@ export default function UsersPanel({ currentUserId }: { currentUserId: string })
     } else {
       setSortKey(key);
       setSortDir(key === 'created_at' ? 'desc' : 'asc');
+    }
+  }
+
+  async function deleteUser(id: string) {
+    setBusy(id);
+    setError(null);
+    try {
+      const res = await fetch(`/api/v1/admin/users/${id}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(body?.error ?? `Request failed (${res.status})`);
+      }
+      setUsers((us) => us.filter((u) => u.id !== id));
+      setConfirmDeleteId(null);
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong.');
+    } finally {
+      setBusy(null);
     }
   }
 
@@ -199,24 +223,58 @@ export default function UsersPanel({ currentUserId }: { currentUserId: string })
                   <td className="whitespace-nowrap px-4 py-3">
                     {u.id === currentUserId ? (
                       <span className="text-xs text-slate-400">—</span>
-                    ) : u.role === 'admin' ? (
-                      <button
-                        type="button"
-                        disabled={busy === u.id}
-                        onClick={() => setRole(u.id, 'user')}
-                        className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 disabled:opacity-50"
-                      >
-                        {busy === u.id ? '…' : 'Remove admin'}
-                      </button>
                     ) : (
-                      <button
-                        type="button"
-                        disabled={busy === u.id}
-                        onClick={() => setRole(u.id, 'admin')}
-                        className="rounded-lg bg-indigo-600 px-3 py-1 text-xs font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-50"
-                      >
-                        {busy === u.id ? '…' : 'Make admin'}
-                      </button>
+                      <div className="flex items-center gap-2">
+                        {u.role === 'admin' ? (
+                          <button
+                            type="button"
+                            disabled={busy === u.id}
+                            onClick={() => setRole(u.id, 'user')}
+                            className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 disabled:opacity-50"
+                          >
+                            {busy === u.id ? '…' : 'Remove admin'}
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled={busy === u.id}
+                            onClick={() => setRole(u.id, 'admin')}
+                            className="rounded-lg bg-indigo-600 px-3 py-1 text-xs font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-50"
+                          >
+                            {busy === u.id ? '…' : 'Make admin'}
+                          </button>
+                        )}
+                        {confirmDeleteId === u.id ? (
+                          <>
+                            <button
+                              type="button"
+                              disabled={busy === u.id}
+                              onClick={() => deleteUser(u.id)}
+                              className="rounded-lg bg-red-600 px-3 py-1 text-xs font-semibold text-white transition hover:bg-red-700 disabled:opacity-50"
+                            >
+                              {busy === u.id ? '…' : 'Confirm delete'}
+                            </button>
+                            <button
+                              type="button"
+                              disabled={busy === u.id}
+                              onClick={() => setConfirmDeleteId(null)}
+                              className="rounded-lg border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 disabled:opacity-50"
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            disabled={busy === u.id}
+                            onClick={() => setConfirmDeleteId(u.id)}
+                            title={`Delete ${u.email}`}
+                            className="rounded-lg border border-red-200 px-3 py-1 text-xs font-semibold text-red-600 transition hover:bg-red-50 disabled:opacity-50"
+                          >
+                            Delete
+                          </button>
+                        )}
+                      </div>
                     )}
                   </td>
                 </tr>

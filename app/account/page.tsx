@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import PasswordForm from '@/components/PasswordForm';
+import DeleteAccountForm from '@/components/DeleteAccountForm';
 
 export default async function AccountPage() {
   let email: string | null = null;
@@ -38,6 +39,16 @@ export default async function AccountPage() {
         </p>
         <div className="mt-4">
           <PasswordForm email={email} />
+        </div>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-red-200 bg-white p-8 shadow-sm">
+        <h2 className="text-lg font-bold text-red-800">Danger zone</h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Permanently delete your LeadVault account and all of its data.
+        </p>
+        <div className="mt-4">
+          <DeleteAccountForm />
         </div>
       </div>
     </main>

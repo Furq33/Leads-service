@@ -12,7 +12,7 @@ export type AuditEntityType = 'lead' | 'settings' | 'user';
 export async function logAudit(
   admin: AdminClient,
   input: {
-    actorId: string;
+    actorId: string | null;
     action: string;
     entityType: AuditEntityType;
     entityId: string | null;
