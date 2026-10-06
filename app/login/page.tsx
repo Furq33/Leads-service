@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
@@ -18,6 +18,17 @@ export default function LoginPage() {
   const [busy, setBusy] = useState(false);
   const [oauthBusy, setOauthBusy] = useState(false);
   const [confirmationSent, setConfirmationSent] = useState(false);
+  const [oauthFailed, setOauthFailed] = useState(false);
+
+  // Surface OAuth failures redirected back from /auth/callback.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('error') === 'oauth') setOauthFailed(true);
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   async function signInWithGoogle() {
     setError(null);
@@ -154,6 +165,13 @@ export default function LoginPage() {
           </svg>
           {oauthBusy ? 'Redirecting…' : 'Continue with Google'}
         </button>
+
+        {oauthFailed && (
+          <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+            Google sign-in didn&apos;t complete. Please try again — if it keeps
+            failing, use email sign-in and let us know.
+          </p>
+        )}
 
         <div className="my-6 flex items-center gap-3">
           <div className="h-px flex-1 bg-slate-200" />
