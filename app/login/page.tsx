@@ -35,10 +35,14 @@ export default function LoginPage() {
     setOauthBusy(true);
     try {
       const supabase = createClient();
+      // Pin the redirect to the canonical app URL so the OAuth flow can
+      // never bounce back to a dev/localhost origin.
+      const appUrl =
+        process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+          redirectTo: `${appUrl}/auth/callback?next=/dashboard`,
         },
       });
       if (oauthError) throw oauthError;
