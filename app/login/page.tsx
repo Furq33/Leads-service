@@ -32,6 +32,9 @@ export default function LoginPage() {
         });
         if (signInError) throw signInError;
         router.push('/dashboard');
+        // Re-fetch server components: the Header lives in the cached root
+        // layout and won't re-run getUser() on client-side navigation alone.
+        router.refresh();
       } else {
         const { data, error: signUpError } = await supabase.auth.signUp({
           email,
@@ -45,6 +48,7 @@ export default function LoginPage() {
           return;
         }
         router.push('/dashboard');
+        router.refresh();
       }
     } catch (err) {
       setError(
