@@ -52,6 +52,12 @@ export default async function Header() {
               >
                 Billing
               </Link>
+              <Link
+                href="/account"
+                className="rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+              >
+                Account
+              </Link>
               {isAdmin && (
                 <Link
                   href="/admin"
