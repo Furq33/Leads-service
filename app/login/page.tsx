@@ -16,10 +16,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [confirmationSent, setConfirmationSent] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    setConfirmationSent(false);
     setBusy(true);
     try {
       const supabase = createClient();
@@ -29,14 +31,21 @@ export default function LoginPage() {
           password,
         });
         if (signInError) throw signInError;
+        router.push('/dashboard');
       } else {
-        const { error: signUpError } = await supabase.auth.signUp({
+        const { data, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
         });
         if (signUpError) throw signUpError;
+        if (!data.session) {
+          // Email confirmation is required — no session yet. Tell the user
+          // instead of bouncing them back to this page via /dashboard.
+          setConfirmationSent(true);
+          return;
+        }
+        router.push('/dashboard');
       }
-      router.push('/dashboard');
     } catch (err) {
       setError(
         err instanceof Error
@@ -133,6 +142,13 @@ export default function LoginPage() {
           {error && (
             <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">
               {error}
+            </p>
+          )}
+
+          {confirmationSent && (
+            <p className="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-sm text-green-800">
+              Account created — check your email for a confirmation link, then
+              sign in here.
             </p>
           )}
 
