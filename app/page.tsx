@@ -4,7 +4,7 @@ const steps = [
   {
     n: '01',
     title: 'Subscribe',
-    body: 'Join LeadVault for a flat $49/month. No tiers, no upsells — every subscriber sees the same vetted opportunities.',
+    body: 'Join LeadVault for a flat $150/month. No tiers, no upsells — every subscriber sees the same vetted opportunities.',
   },
   {
     n: '02',
@@ -74,7 +74,7 @@ export default function Home() {
             </Link>
           </div>
           <p className="mt-4 text-sm text-slate-500">
-            $49/month · Cancel anytime
+            $150/month · Cancel anytime
           </p>
         </div>
       </section>
@@ -124,7 +124,7 @@ export default function Home() {
             <h3 className="text-xl font-bold">LeadVault Pro</h3>
             <div className="mt-4 flex items-baseline gap-1">
               <span className="text-5xl font-extrabold tracking-tight">
-                $49
+                $150
               </span>
               <span className="text-slate-500">/month</span>
             </div>
@@ -174,7 +174,7 @@ export default function Home() {
             href="/login"
             className="inline-block rounded-xl bg-slate-900 px-8 py-3.5 text-base font-semibold text-white transition hover:bg-slate-700"
           >
-            Claim your seat — $49/month
+            Claim your seat — $150/month
           </Link>
         </div>
       </section>

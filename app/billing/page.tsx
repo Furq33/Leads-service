@@ -110,7 +110,7 @@ export default async function BillingPage({
           <div className="mt-6">
             <div className="rounded-2xl bg-slate-50 p-6">
               <h3 className="text-xl font-bold text-slate-900">
-                LeadVault Pro — $49/month
+                LeadVault Pro — $150/month
               </h3>
               <ul className="mt-3 space-y-2 text-sm text-slate-600">
                 <li>✓ Exclusive allocation — max 5 subscribers per lead</li>
