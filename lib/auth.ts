@@ -50,11 +50,27 @@ export async function requireAdmin(): Promise<AuthGuard> {
   if (guard.error) return guard;
 
   const admin = createAdminClient();
-  const { data: profile } = await admin
+  const { data: profile, error } = await admin
     .from('profiles')
     .select('role')
     .eq('id', guard.user.id)
     .maybeSingle();
+
+  if (error) {
+    // A failing service-role lookup (e.g. mismatched SUPABASE_SERVICE_ROLE_KEY)
+    // must not silently become a 403 — log it so the cause is diagnosable.
+    console.error(
+      '[requireAdmin] service-role profile lookup failed:',
+      error.message
+    );
+    return {
+      user: null,
+      error: NextResponse.json(
+        { error: 'admin check unavailable' },
+        { status: 503 }
+      ),
+    };
+  }
 
   if (!profile || profile.role !== 'admin') {
     return {
