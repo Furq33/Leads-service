@@ -65,12 +65,32 @@ export default async function Header() {
               </span>
             </>
           ) : (
-            <Link
-              href="/login"
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700"
-            >
-              Sign in
-            </Link>
+            <>
+              <Link
+                href="/sample-leads"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 sm:inline-block"
+              >
+                Sample leads
+              </Link>
+              <Link
+                href="/how-it-works"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 sm:inline-block"
+              >
+                How it works
+              </Link>
+              <Link
+                href="/faq"
+                className="hidden rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 sm:inline-block"
+              >
+                FAQ
+              </Link>
+              <Link
+                href="/login"
+                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700"
+              >
+                Sign in
+              </Link>
+            </>
           )}
         </nav>
       </div>

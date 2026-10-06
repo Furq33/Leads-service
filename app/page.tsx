@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import SampleLeadCard from '@/components/SampleLeadCard';
+import { SAMPLE_LEADS } from '@/lib/sample-leads';
 
 const steps = [
   {
@@ -76,6 +78,35 @@ export default function Home() {
           <p className="mt-4 text-sm text-slate-500">
             $150/month · Cancel anytime
           </p>
+        </div>
+      </section>
+
+      {/* Peek inside */}
+      <section className="border-b border-slate-100 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+          <h2 className="text-center text-3xl font-extrabold tracking-tight">
+            Take a peek inside
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-slate-600">
+            This is the format every member sees — vetted numbers up front,
+            exact links unlocked with membership.
+          </p>
+          <div className="mx-auto mt-10 grid max-w-4xl gap-6 md:grid-cols-2">
+            {SAMPLE_LEADS.slice(0, 2).map((lead) => (
+              <SampleLeadCard key={lead.id} lead={lead} />
+            ))}
+          </div>
+          <p className="mt-6 text-center text-xs text-slate-400">
+            Examples shown for illustration only.
+          </p>
+          <div className="mt-6 text-center">
+            <Link
+              href="/sample-leads"
+              className="inline-block rounded-xl border border-slate-200 bg-white px-8 py-3.5 text-base font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900"
+            >
+              Explore more examples →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -191,7 +222,16 @@ export default function Home() {
           <p className="text-sm text-slate-500">
             Exclusive e-commerce leads for Amazon & Walmart arbitrage.
           </p>
-          <div className="flex gap-4 text-sm font-medium text-slate-600">
+          <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-slate-600">
+            <Link href="/sample-leads" className="hover:text-slate-900">
+              Sample leads
+            </Link>
+            <Link href="/how-it-works" className="hover:text-slate-900">
+              How it works
+            </Link>
+            <Link href="/faq" className="hover:text-slate-900">
+              FAQ
+            </Link>
             <Link href="/login" className="hover:text-slate-900">
               Sign in
             </Link>
