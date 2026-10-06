@@ -5,7 +5,7 @@ import { SAMPLE_LEADS } from '@/lib/sample-leads';
 export const metadata = {
   title: 'Sample Leads — LeadVault',
   description:
-    'See what a LeadVault arbitrage lead looks like. Vetted buy price, sell price, and margin — each shown to at most 5 subscribers.',
+    'See what a LeadVault lead looks like. Vetted buy price, sell price, and margin — each shown to one group of 5 members.',
 };
 
 export default function SampleLeadsPage() {

@@ -3,43 +3,43 @@ import Link from 'next/link';
 export const metadata = {
   title: 'How It Works — LeadVault',
   description:
-    'How LeadVault finds, vets, and exclusively allocates Amazon and Walmart arbitrage leads to at most 5 subscribers each.',
+    'How LeadVault finds, vets, and assigns exclusive e-commerce leads to private groups of 5 members.',
 };
 
 const steps = [
   {
     n: '01',
     title: 'We hunt',
-    body: 'Our team scans Amazon, Walmart, and major retailers daily for pricing mismatches — clearance events, coupon stacks, regional price drops, and bundle deals with real resale value.',
+    body: 'Our team scans retailers and marketplaces daily for pricing mismatches — clearance events, coupon stacks, regional price drops, and wholesale deals with real resale value. Opportunities can come from anywhere.',
   },
   {
     n: '02',
     title: 'We vet',
-    body: 'Every candidate lead is verified by hand: is it actually in stock? Is the sell price real and recent? What do fees and shipping do to the margin? Only leads with a genuine, repeatable margin make the cut. Most candidates are rejected.',
+    body: 'Every candidate lead is verified by hand: is it actually available? Is the sell price real and recent? What do fees and shipping do to the margin? Only leads with a genuine, repeatable margin make the cut. Most candidates are rejected.',
   },
   {
     n: '03',
-    title: 'You get your seat',
-    body: 'Each published lead is allocated to at most 5 subscribers, first-come through a fair rotation. You see the buy price, sell price, margin, and the exact supplier and listing links — buy, list, and pocket the difference.',
+    title: 'Your group gets the lead',
+    body: 'Each lead is assigned to exactly one group of 5 members. You see where to buy, where to sell, and at what prices — then you buy, list on Amazon, Walmart, or wherever you sell (including in bulk), and pocket the difference.',
   },
 ];
 
 const promises = [
   {
-    title: 'Max 5 subscribers per lead — ever',
-    body: 'A lead is allocated to no more than five members. When the fifth seat fills, the lead is closed permanently. You will never compete with hundreds of sellers on the same product.',
+    title: 'One group of 5 per lead — ever',
+    body: 'A lead is assigned to exactly one group of five members. Nobody outside your group ever sees it. You will never compete with hundreds of sellers on the same product.',
   },
   {
-    title: 'Fair rotation, not fastest finger',
-    body: 'Leads are allocated with a fairness rotation: members who received leads least recently get priority on new ones. Everyone gets a fair shot at fresh opportunities.',
+    title: 'Automatic groups, no waiting',
+    body: 'When you subscribe, you are placed into a group of 5 automatically. As new members join, new groups form — you always have a seat and leads keep flowing.',
   },
   {
     title: 'Vetted margins, not guesses',
-    body: 'Buy price, sell price, and margin are verified before a lead publishes. If the numbers don’t hold up under scrutiny, the lead never reaches your dashboard.',
+    body: 'Buy price, sell price, and margin are verified before a lead is assigned. If the numbers don’t hold up under scrutiny, the lead never reaches your dashboard.',
   },
   {
     title: 'Fresh or nothing',
-    body: 'Leads publish as they’re found and vetted — never recycled, never stale. Expired opportunities are swept automatically so your dashboard only shows what’s actionable.',
+    body: 'Leads are assigned as they’re found and vetted — never recycled, never stale. Expired opportunities are swept automatically so your dashboard only shows what’s actionable.',
   },
 ];
 
@@ -56,8 +56,8 @@ export default function HowItWorksPage() {
             From price mismatch to your margin.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-600">
-            LeadVault turns retail pricing inefficiencies into exclusive,
-            actionable arbitrage leads — shared with at most five people.
+            LeadVault turns pricing inefficiencies into exclusive,
+            actionable leads — each one shared with a single group of five.
           </p>
         </div>
       </section>
@@ -108,8 +108,8 @@ export default function HowItWorksPage() {
           Ready to see your first lead?
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-slate-600">
-          Join LeadVault and get allocated exclusive arbitrage leads — max
-          five subscribers per lead, cancel anytime.
+          Join LeadVault and get exclusive leads assigned to your private
+          group of 5 — cancel anytime.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link

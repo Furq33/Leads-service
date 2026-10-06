@@ -6,36 +6,37 @@ const steps = [
   {
     n: '01',
     title: 'Subscribe',
-    body: 'Join LeadVault for a flat $150/month. No tiers, no upsells — every subscriber sees the same vetted opportunities.',
+    body: 'Join LeadVault for a flat $150/month. You are automatically placed in a private group of 5 members — no tiers, no upsells.',
   },
   {
     n: '02',
-    title: 'We allocate',
-    body: 'Our team vets every arbitrage lead — buy price, sell price, real margins — and each lead is allocated to at most 5 subscribers. Never saturated, never stale.',
+    title: 'We assign',
+    body: 'Our team vets every lead — where to buy, where to sell, at what prices — and assigns it to your group. Only your 5 members ever see it.',
   },
   {
     n: '03',
-    title: 'You act',
-    body: 'Buy from the supplier link, list on Amazon or Walmart, and pocket the margin. Fresh leads land in your dashboard as soon as they publish.',
+    title: 'You sell',
+    body: 'Buy from the source, then list on Amazon, Walmart, or wherever you sell — including in bulk — and pocket the margin.',
   },
 ];
 
 const features = [
-  'Exclusive allocation — each lead is visible to at most 5 subscribers',
+  'Private group of 5 — every lead is exclusive to your group',
   'Vetted buy price, sell price, and margin on every lead',
-  'Direct supplier and listing links — act in minutes',
-  'Fresh leads published regularly, never recycled',
+  'Exact sourcing guidance — buy from anywhere, sell anywhere',
+  'Built for bulk: list on Amazon, Walmart, or your own channels',
+  'Fresh leads assigned regularly, never recycled',
   'Cancel anytime from your billing page',
 ];
 
 const faqs = [
   {
     q: 'How do you keep leads from getting saturated?',
-    a: 'Every lead is allocated to a maximum of 5 subscribers. Once the cap is hit, the lead is never shown to anyone else — so you are never competing with hundreds of other sellers on the same product.',
+    a: 'Every lead is assigned to exactly one group of 5 members. Nobody outside your group ever sees it — so you are never competing with hundreds of other sellers on the same product.',
   },
   {
     q: 'What marketplaces do the leads target?',
-    a: 'Leads are built for Amazon and Walmart arbitrage: we show you where to buy and where the verified sell price comes from, so you can move fast.',
+    a: 'Anywhere. Each lead tells you where to buy and where to sell at what prices — Amazon, Walmart, eBay, or any other marketplace. Many members sell in bulk.',
   },
   {
     q: 'Can I cancel my subscription?',
@@ -50,16 +51,16 @@ export default function Home() {
       <section className="border-b border-slate-100 bg-gradient-to-b from-indigo-50 via-white to-white">
         <div className="mx-auto max-w-7xl px-4 pb-20 pt-20 text-center sm:px-6 sm:pt-28">
           <p className="mb-4 inline-block rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700">
-            Max 5 subscribers per lead
+            Your private group of 5
           </p>
           <h1 className="mx-auto max-w-3xl text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-            Exclusive arbitrage leads.{' '}
+            Exclusive product leads.{' '}
             <span className="text-indigo-600">Never saturated.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
-            LeadVault vets every Amazon and Walmart arbitrage opportunity —
-            buy price, sell price, and margin — and shows each lead to at most
-            5 subscribers. No lead farms, no competition stampedes.
+            LeadVault vets every e-commerce opportunity — where to buy, where
+            to sell, at what prices — and hands each lead to one private group
+            of 5 members. No lead farms, no competition stampedes.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
@@ -133,11 +134,11 @@ export default function Home() {
           ))}
         </div>
         <div className="mx-auto mt-10 max-w-3xl rounded-2xl bg-indigo-600 p-8 text-center text-white">
-          <p className="text-lg font-semibold">The N=5 exclusivity promise</p>
+          <p className="text-lg font-semibold">The group-of-5 promise</p>
           <p className="mt-2 text-indigo-100">
-            A lead is allocated to no more than five subscribers — ever. When
-            the fifth seat fills, the lead is closed for good. That is what
-            keeps every margin real.
+            Every lead goes to exactly one group of five members — ever.
+            Nobody outside your group sees it. That is what keeps every
+            margin real.
           </p>
         </div>
       </section>
@@ -220,7 +221,7 @@ export default function Home() {
             <span className="font-bold text-slate-900">LeadVault</span>
           </div>
           <p className="text-sm text-slate-500">
-            Exclusive e-commerce leads for Amazon & Walmart arbitrage.
+            Exclusive e-commerce leads for serious resellers.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm font-medium text-slate-600">
             <Link href="/sample-leads" className="hover:text-slate-900">

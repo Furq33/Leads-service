@@ -20,11 +20,12 @@ function marginDollars(lead: Lead): number {
 
 export default async function DashboardPage() {
   let leads: Lead[] = [];
+  let groupName: string | null = null;
 
   try {
     const supabase = createClient();
-    // RLS enforces per-subscriber visibility — this plain select only
-    // returns leads allocated to the signed-in subscriber.
+    // RLS enforces per-group visibility — this plain select only
+    // returns leads assigned to the signed-in member's group.
     const { data, error } = await supabase
       .from('leads')
       .select(
@@ -34,6 +35,21 @@ export default async function DashboardPage() {
 
     if (!error && data) {
       leads = (data as unknown as Lead[]).filter((l) => l && l.id);
+    }
+
+    // Show the member which group they're in.
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      const { data: gm } = await supabase
+        .from('group_members')
+        .select('lead_groups(name)')
+        .eq('user_id', user.id)
+        .maybeSingle();
+      const lg = (gm as { lead_groups?: { name?: string } | null } | null)
+        ?.lead_groups;
+      groupName = lg?.name ?? null;
     }
   } catch {
     leads = [];
@@ -53,9 +69,14 @@ export default async function DashboardPage() {
             My Leads
           </h1>
           <p className="mt-1 text-slate-600">
-            Exclusive opportunities allocated to you — max 5 subscribers per
-            lead.
+            Exclusive opportunities for your group — every lead is shared with
+            at most 5 members.
           </p>
+          {groupName && (
+            <p className="mt-2 inline-block rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-800">
+              You&apos;re in {groupName}
+            </p>
+          )}
         </div>
         <div className="flex gap-3">
           <div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-center shadow-sm">

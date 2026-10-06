@@ -2,7 +2,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 
 type AdminClient = ReturnType<typeof createAdminClient>;
 
-export type AuditEntityType = 'lead' | 'settings';
+export type AuditEntityType = 'lead' | 'settings' | 'user';
 
 /**
  * Write one row to the audit_log table. Shared by admin route handlers.
